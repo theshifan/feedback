@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Product, Category
+from .models import Product, Category,Feedback
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -13,3 +13,20 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = '__all__'
 
+class FeedbackSerializer(serializers.ModelSerializer):
+    products = ProductSerializer(read_only=True)
+    category = CategorySerializer(read_only=True)
+    product_id = serializers.PrimaryKeyRelatedField(
+        queryset=Product.objects.all(), source='products', write_only=True)
+    category_id = serializers.PrimaryKeyRelatedField(
+        queryset=Category.objects.all(), source='category', write_only=True)
+
+    class Meta:
+        model = Feedback
+        fields = [
+            'id', 'name', 'email',
+            'products', 'product_id',
+            'category', 'category_id',
+            'feedback',
+            'rating', 'timestamp'
+        ]
