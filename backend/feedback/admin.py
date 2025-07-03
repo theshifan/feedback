@@ -1,30 +1,37 @@
 from django.contrib import admin
-
-# Register your models here.
-from django.contrib import admin
 from feedback.models import *
 from django.db.models import Avg
 from django.core.serializers.json import DjangoJSONEncoder
 import json
 
-# chnanges the admin panel
 class WriterAdmin(admin.ModelAdmin):
-    change_list_template = 'admin/change_list.html'
+    change_list_template = 'admin/feedback/feedback/change_list.html'  # More specific path
+    
     def changelist_view(self, request, extra_context=None):
-        # Aggregate the prduct and the ratings
+        # Aggregate the products and ratings
         chart_data = (
             Feedback.objects
-            .values('products__name')  # get product name
-            .annotate(avg_rating=Avg('rating'))  # average of ratings
+            .values('products__name')
+            .annotate(avg_rating=Avg('rating'))
             .order_by('products__name')
         )
-        # Serialize and attach the chart data to the template context
-        as_json = json.dumps(list(chart_data), cls=DjangoJSONEncoder)
-        extra_context = extra_context or {"chart_data": as_json}
+        
+        # Convert to format Chart.js expects
+        chart_labels = [item['products__name'] for item in chart_data]
+        chart_values = [float(item['avg_rating']) for item in chart_data]  # Ensure float
+        
+        # Create proper Chart.js data structure
+        chart_js_data = {
+            "labels": chart_labels,
+            "datasets": [{
+                "label": "Average Rating",
+                "data": chart_values,
+            }]
+        }
+        
+        extra_context = extra_context or {}
+        extra_context['chart_data'] = json.dumps(chart_js_data, cls=DjangoJSONEncoder)
         return super().changelist_view(request, extra_context=extra_context)
 
 admin.site.register(Product)
 admin.site.register(Feedback, WriterAdmin)
-
-
-

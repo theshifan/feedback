@@ -1,0 +1,61 @@
+{% extends "admin/change_list.html" %}  <!-- Extend change_list.html instead -->
+
+{% block extrahead %}
+{{ block.super }}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<div id="content-main">
+    <!-- Chart container above the results -->
+    <div style="margin: 20px 0; padding: 20px; background: white; border: 1px solid #ddd;">
+        <canvas id="ratingChart" height="100"></canvas>
+        <p id="chart-error" style="color:red;"></p>
+    </div>
+    
+    {{ block.super }}  <!-- Include all the original change list content -->
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const ctx = document.getElementById('ratingChart');
+    const errorEl = document.getElementById('chart-error');
+    
+    try {
+        const chartData = JSON.parse('{{ chart_data|escapejs }}');
+        
+        if (!chartData.labels || !chartData.datasets) {
+            throw new Error("Invalid chart data structure");
+        }
+        
+        new Chart(ctx, {
+            type: 'bar',
+            data: chartData,
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 5,
+                        title: {
+                            display: true,
+                            text: 'Average Rating'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Product'
+                        }
+                    }
+                }
+            }
+        });
+    } catch (error) {
+        errorEl.textContent = "Failed to load chart: " + error.message;
+        console.error("Chart error:", error);
+    }
+});
+</script>
+{% endblock %}
