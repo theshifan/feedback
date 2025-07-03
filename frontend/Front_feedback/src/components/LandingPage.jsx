@@ -32,7 +32,7 @@ const LandingPage = () => {
             flexDirection: 'column',    
             alignItems: 'center',        
             justifyContent: 'center',}}>
-      {/* top head  */}
+      {/*----------- top head ----------- */}
       <AppBar position="fixed" color="primary">
         <Toolbar>
         
@@ -44,20 +44,19 @@ const LandingPage = () => {
           >
             <MenuIcon />
           </IconButton>
+          
+        <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
+             <a href="/feedback" style={{ textDecoration: 'none', color: 'inherit' }}>
+             <MenuItem onClick={handleMenuClose}>Give Your Feedback</MenuItem>
+             </a>
+             <a href="/Index" style={{ textDecoration: 'none', color: 'inherit' }}>
+             <MenuItem onClick={handleMenuClose}>Index</MenuItem>
+             </a>
+        </Menu>
 
-          {/* Dropdown Menu */}
-          <Menu
-            anchorEl={anchorEl}
-            open={Boolean(anchorEl)}
-            onClose={handleMenuClose}
-          >
-            <MenuItem onClick={handleMenuClose}>Option 1</MenuItem>
-            <MenuItem onClick={handleMenuClose}>Option 2</MenuItem>
-          </Menu>
-
-          {/* Optional App title */}
+          {/*  App title */}
           <Typography variant="h6" sx={{ ml: 2 }}>
-            My Feedback App
+            Feedback App
           </Typography>
         </Toolbar>
       </AppBar>
@@ -67,10 +66,12 @@ const LandingPage = () => {
         <Typography variant="h3" fontWeight="bold">
     Welcome
   </Typography>
-
+  <a href="/feedback">
   <Button variant="contained" sx={{ mt: 2 }}>
-    Get Started
+    give your feed back
   </Button>
+  </a>
+  <p>your feed back is important to us, so let us server you better next time</p>
     </Box>
   );
 };
