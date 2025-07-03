@@ -13,19 +13,24 @@ import {
   ListItemText,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import axios from 'axios';
 
 const ProductList = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [products, setProducts] = useState([]);
+  const getproduct =() =>{
+    axios.get('http://127.0.0.1:8000/main/products/')
+    .then ((response) =>{
+      console.log(response.data)
+      setProducts(response.data)
+    })
+    .catch((error) =>{
+      console.log(error)
+    })
 
+  }
   useEffect(() => {
-    // Replace this with API call if needed
-    const tempProducts = [
-      { id: 1, name: 'Donut Bun' },
-      { id: 2, name: 'Burger' },
-      { id: 3, name: 'Pizza Slice' },
-    ];
-    setProducts(tempProducts);
+    getproduct()
   }, []);
 
   const handleMenuOpen = (event) => {

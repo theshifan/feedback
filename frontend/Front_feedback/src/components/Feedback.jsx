@@ -14,7 +14,7 @@ import {
   Paper,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-
+import axios from 'axios'
 const Feedback = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [products, setProducts] = useState([]);
@@ -23,8 +23,8 @@ const Feedback = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    product: '',
-    category: '',
+    product_id: '',
+    category_id: '',
     feedback: '',
     rating: 0,
   });
@@ -48,6 +48,35 @@ const Feedback = () => {
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
+  const [product,setProduct] = useState([])
+  const getproduct =() =>{
+    axios.get('http://127.0.0.1:8000/main/products/')
+    .then ((response) =>{
+      console.log(response.data)
+      setProduct(response.data)
+    })
+    .catch((error) =>{
+      console.log(error)
+    })
+
+  }
+
+   const [categorie,setCategorie] = useState([])
+  const getcategory =() =>{
+    axios.get('http://127.0.0.1:8000/main/categories/')
+    .then ((response) =>{
+      console.log(response.data)
+      setCategorie(response.data)
+    })
+    .catch((error) =>{
+      console.log(error)
+    })
+
+  }
+  useEffect(() =>{
+    getproduct()
+    getcategory()
+  },[])
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -60,6 +89,14 @@ const Feedback = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
+    axios.post('http://127.0.0.1:8000/main/feedback/',formData)
+    .then ((response) =>{
+      console.log(response.data)
+    })
+    .catch((error) =>{
+      console.log(error)
+    })
+
     // send this data to your backend
   };
 
@@ -124,36 +161,39 @@ const Feedback = () => {
               value={formData.email}
               onChange={handleChange}
             />
+            
             <TextField
               label="Product"
-              name="product"
+              name="product_id"
               fullWidth
               select
               margin="normal"
-              value={formData.product}
+              value={formData.product_id}
               onChange={handleChange}
             >
-              {products.map((product) => (
-                <MuiMenuItem key={product.id} value={product.name}>
-                  {product.name}
+              {product.map((pdt) => (
+                <MuiMenuItem key={pdt.id} value={pdt.id}>
+                  {pdt.name}
                 </MuiMenuItem>
               ))}
             </TextField>
+
             <TextField
               label="Category"
-              name="category"
+              name="category_id"
               fullWidth
               select
               margin="normal"
-              value={formData.category}
+              value={formData.category_id}
               onChange={handleChange}
             >
-              {categories.map((cat) => (
-                <MuiMenuItem key={cat.id} value={cat.name}>
+              {categorie.map((cat) => (
+                <MuiMenuItem key={cat.id} value={cat.id}>
                   {cat.name}
                 </MuiMenuItem>
               ))}
             </TextField>
+
             <TextField
               label="Feedback"
               name="feedback"
@@ -173,7 +213,8 @@ const Feedback = () => {
               variant="contained"
               color="primary"
               fullWidth
-              sx={{ mt: 3 }}
+              sx={{ mt: 3 }} 
+              onClick={handleSubmit}
             >
               Submit
             </Button>
