@@ -70,8 +70,10 @@ const FeedbackList = () => {
 
 //   to filter the category 
   const filteredFeedbacks = selectedCategory
-    ? feedbacks.filter((fb) => fb.category?.name === selectedCategory)
-    : feedbacks;
+  ? feedbacks.filter((fb) => fb.category?.id === selectedCategory)
+  : feedbacks;
+
+
 // to get the catogary name from the id
   const getCategoryName = (id) => {
     const category = categories.find((cat) => cat.id === id);
@@ -132,7 +134,9 @@ const FeedbackList = () => {
             labelId="category-filter-label"
             value={selectedCategory}
             label="Filter by Category"
-            onChange={(e) => setSelectedCategory(e.target.value)}
+            onChange={(e) => setSelectedCategory(
+              e.target.value === '' ? '' : parseInt(e.target.value)
+            )}
           >
             <MenuItem value=''>All</MenuItem>
             {categories.map((cat) => (
