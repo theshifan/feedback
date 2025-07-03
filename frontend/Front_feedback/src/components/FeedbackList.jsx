@@ -16,6 +16,7 @@ import {
   Menu
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import axios from 'axios';
 
 const FeedbackList = () => {
   const [feedbacks, setFeedbacks] = useState([]);
@@ -24,22 +25,52 @@ const FeedbackList = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [anchorEl, setAnchorEl] = useState(null);
 
-  useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/categories/')
-      .then((res) => res.json())
-      .then((data) => setCategories(data));
+  const getfeedbacks =() =>{
+    axios.get('http://127.0.0.1:8000/main/feedback/')
+    .then ((response) =>{
+      console.log(response.data)
+      setFeedbacks(response.data)
+    })
+    .catch((error) =>{
+      console.log(error)
+    })
 
-    fetch('http://127.0.0.1:8000/api/products/')
-      .then((res) => res.json())
-      .then((data) => setProducts(data));
+  }
 
-    fetch('http://127.0.0.1:8000/api/feedbacks/')
-      .then((res) => res.json())
-      .then((data) => setFeedbacks(data));
-  }, []);
+  
+   const getproduct =() =>{
+    axios.get('http://127.0.0.1:8000/main/products/')
+    .then ((response) =>{
+      console.log(response.data)
+      setProducts(response.data)
+    })
+    .catch((error) =>{
+      console.log(error)
+    })
+
+  }
+
+   
+  const getcategory =() =>{
+    axios.get('http://127.0.0.1:8000/main/categories/')
+    .then ((response) =>{
+      console.log(response.data)
+      setCategories(response.data)
+    })
+    .catch((error) =>{
+      console.log(error)
+    })
+
+  }
+  useEffect(() =>{
+    getproduct()
+    getcategory()
+    getfeedbacks()
+  },[])
+
 //   to filter the category 
   const filteredFeedbacks = selectedCategory
-    ? feedbacks.filter((fb) => fb.category === selectedCategory)
+    ? feedbacks.filter((fb) => fb.category?.name === selectedCategory)
     : feedbacks;
 // to get the catogary name from the id
   const getCategoryName = (id) => {
@@ -121,8 +152,8 @@ const FeedbackList = () => {
               <Typography variant="body2" color="text.secondary">{fb.email}</Typography>
               <Typography sx={{ my: 1 }}>{fb.feedback}</Typography>
               <Rating value={parseInt(fb.rating)} readOnly />
-              <Typography variant="caption">Product: {getProductName(fb.product)}</Typography><br />
-              <Typography variant="caption">Category: {getCategoryName(fb.category)}</Typography>
+              <Typography variant="caption">Product: {fb.products?.name}</Typography><br />
+              <Typography variant="caption">Category: {fb.category?.name}</Typography>
             </CardContent>
           </Card>
         ))}
