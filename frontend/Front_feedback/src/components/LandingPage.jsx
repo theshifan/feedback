@@ -46,11 +46,17 @@ const LandingPage = () => {
           </IconButton>
           
         <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
+             <a href="/products" style={{ textDecoration: 'none', color: 'inherit' }}>
+             <MenuItem onClick={handleMenuClose}>List of Products</MenuItem>
+             </a>
              <a href="/feedback" style={{ textDecoration: 'none', color: 'inherit' }}>
              <MenuItem onClick={handleMenuClose}>Give Your Feedback</MenuItem>
              </a>
              <a href="/Index" style={{ textDecoration: 'none', color: 'inherit' }}>
              <MenuItem onClick={handleMenuClose}>Index</MenuItem>
+             </a>
+              <a href="/feedbacks" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <MenuItem onClick={handleMenuClose}>feedbacks</MenuItem>
              </a>
         </Menu>
 
