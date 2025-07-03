@@ -61,7 +61,7 @@ const ProductList = () => {
           <a href="/feedback" style={{ textDecoration: 'none', color: 'inherit' }}>
           <MenuItem onClick={handleMenuClose}>Give Your Feedback</MenuItem>
           </a>
-          <a href="/feedbacks" style={{ textDecoration: 'none', color: 'inherit' }}>
+          <a href="/feedbacklist" style={{ textDecoration: 'none', color: 'inherit' }}>
           <MenuItem onClick={handleMenuClose}>feedbacks</MenuItem>
           </a>
             </Menu>

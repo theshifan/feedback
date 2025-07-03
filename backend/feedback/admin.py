@@ -35,3 +35,4 @@ class WriterAdmin(admin.ModelAdmin):
 
 admin.site.register(Product)
 admin.site.register(Feedback, WriterAdmin)
+admin.site.register(Category)

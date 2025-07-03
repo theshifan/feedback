@@ -55,7 +55,7 @@ const LandingPage = () => {
              <a href="/Index" style={{ textDecoration: 'none', color: 'inherit' }}>
              <MenuItem onClick={handleMenuClose}>Index</MenuItem>
              </a>
-              <a href="/feedbacks" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <a href="/feedbacklist" style={{ textDecoration: 'none', color: 'inherit' }}>
               <MenuItem onClick={handleMenuClose}>feedbacks</MenuItem>
              </a>
         </Menu>
