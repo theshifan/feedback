@@ -1,67 +1,128 @@
-# Feedback app - Product Feedback Management System  
+# Feedback App – Product Feedback Management System
 
-A powerful and intuitive feedback management application built with React.js, Django, and SQLite.  
+## Table of Contents
 
-##  Overview
-Feedback app is a full-stack web application designed to collect, manage, and analyze user feedback for products. Users can submit feedback, rate products, and categorize their reviews, while admins have full control over products, categories, and feedback moderation—all visualized through an interactive dashboard.  
+* [Introduction](#introduction)
+* [Features](#features)
+* [Technologies Used](#technologies-used)
+* [Getting Started](#getting-started)
+* [Installation](#installation)
+* [Usage](#usage)
+* [Admin Features](#admin-features)
+* [Requirements](#requirements)
+* [Contact](#contact)
 
-### Key Features 
-✔ User-Friendly Feedback Submission – Post feedback with ratings, comments, and categories.  
-✔ Smart Filtering & Sorting – View feedback by product, category, or rating.  
-✔ Interactive Dashboard – Admins can track feedback trends with rating vs. product charts.  
-✔ Admin Control Panel – Add/remove products, manage categories, and delete feedback.  
-✔ Modern UI with MUI (Material-UI) – Sleek, responsive, and intuitive design.  
+---
 
-##  Tech Stack  
-| Frontend -React.js   | Backend -  Django  | Database - SQLite    | UI Framework  - Material-UI  |  
-      
+## Introduction
 
-  
-### Prerequisites  
-- Node.js (v16+)  
-- Python (v3.8+)  
-- npm/yarn  
+**Feedback App** is a full-stack web application that enables users to submit feedback on various products and services. Built with React.js, Django, and SQLite, it provides a modern interface for users and administrators to manage product reviews effectively.
 
-### Installation  
-#### 1. Clone the Repository  
+---
 
+## Features
+
+* Submit feedback with rating, comments, and category.
+* Filter and sort feedback by product, category, or rating.
+* Interactive admin dashboard with product rating analysis.
+* Add/delete products and categories dynamically.
+* Sleek and responsive UI using Material UI.
+
+---
+
+## Technologies Used
+
+* **Frontend:** React.js
+* **Backend:** Django (REST Framework)
+* **Database:** SQLite
+* **UI Framework:** Material UI
+
+---
+
+## Getting Started
+
+To run this project locally, follow the steps below.
+
+---
+
+## Installation
+
+### 1. Clone the Repository
+
+```bash
 git clone https://github.com/theshifan/feedback.git
-cd FeedbackHub
+cd feedback
+```
 
+---
 
-#### 2. Set Up Backend (Django)
+### 2. Backend Setup (Django)
 
+```bash
 cd backend
+python -m venv venv        # optional, but recommended
+source venv/bin/activate   # or venv\Scripts\activate on Windows
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
-and install djngo an djangorestframework
+```
 
+> Make sure you have `Django` and `djangorestframework` installed.
 
-#### 3. Set Up Frontend (React)
+---
 
+### 3. Frontend Setup (React)
+
+```bash
 cd ../frontend
 npm install
 npm start
+```
 
-Install MUI and icons:
+Also install MUI and icons:
 
+```bash
 npm install @mui/material @emotion/react @emotion/styled
 npm install @mui/icons-material
+```
 
+---
 
-### Admin Features
-Add/Delete Products & Categories
+## Usage
 
-View & Moderate Feedback
+Once both frontend and backend servers are running:
 
-Analytics Dashboard (Rating vs. Product Charts)
+* Access the frontend at: `http://localhost:3000`
+* Backend API runs at: `http://localhost:8000`
 
-### Requirements 
+---
 
+## Admin Features
+
+* Add and delete products and categories
+* View and manage submitted feedback
+* Visual charts: product vs rating analytics
+
+---
+
+## Requirements
+
+Python packages (from `requirements.txt`):
+
+```
 asgiref==3.8.1
 Django==5.2.3
 djangorestframework==3.16.0
 sqlparse==0.5.3
 tzdata==2025.2
+```
+
+---
+
+## Contact
+
+For questions, issues, or suggestions:
+
+* GitHub: [@theshifan](https://github.com/theshifan)
+* Email: [shifan9914@gmail.com.com](mailto:shifan9914@gmail.com.com)
 
