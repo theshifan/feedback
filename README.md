@@ -35,6 +35,7 @@ cd backend
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
+and install djngo an djangorestframework
 
 
 3. Set Up Frontend (React)
@@ -42,6 +43,11 @@ python manage.py runserver
 cd ../frontend
 npm install
 npm start
+
+Install MUI and icons:
+
+npm install @mui/material @emotion/react @emotion/styled
+npm install @mui/icons-material
 
 
 ### Admin Features
