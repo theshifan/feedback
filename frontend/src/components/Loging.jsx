@@ -68,7 +68,8 @@ function Loging() {
           <div style={{ textAlign: "center" }}>OR</div>
 
           <p>If you don't have an account..</p>
-          <Link to="/signup" className="register-btn">Register</Link>
+          {/* <Link to="/signup" className="register-btn">Register</Link> */}
+          <a href="/singup"className="register-btn">Register</a>
         </div>
 
         <div className="image-section">

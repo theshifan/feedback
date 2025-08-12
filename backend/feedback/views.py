@@ -10,10 +10,10 @@ from .serializers import UserSerializer
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from rest_framework.permissions import AllowAny
-
+from rest_framework.permissions import IsAuthenticated
 
 class SignupView(APIView):
-    permission_classes = [AllowAny]
+    permission_classes = (IsAuthenticated)
     def post(self, request):
         username = request.data.get('username')
         email = request.data.get('email')
@@ -52,6 +52,20 @@ class LoginView(APIView):
                    'user': UserSerializer(user).data
                })
            return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+       
+
+class LogoutView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request):
+        try:
+            refresh_token = request.data["refresh"]
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+
+            return Response({"detail": "Logout successful"}, status=status.HTTP_205_RESET_CONTENT)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()

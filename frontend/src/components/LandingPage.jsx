@@ -10,8 +10,11 @@ import {
 } from '@mui/material';
 import Button from '@mui/material/Button';
 import MenuIcon from '@mui/icons-material/Menu';
+import { logoutUser } from '../Logout.js';
+import { useNavigate } from 'react-router-dom';
 
 const LandingPage = () => {
+  const navigate = useNavigate();
   
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -64,6 +67,14 @@ const LandingPage = () => {
           <Typography variant="h6" sx={{ ml: 2 }}>
             Feedback App
           </Typography>
+          {/* Logout Button on Right */}
+          <Button
+            color="inherit"
+            onClick={() => logoutUser(navigate)}
+            sx={{ ml: 'auto' }}
+          >
+            Logout
+          </Button>
         </Toolbar>
       </AppBar>
 
@@ -77,8 +88,13 @@ const LandingPage = () => {
     give your feed back
   </Button>
   </a>
+  
   <p>your feed back is important to us, so let us server you better next time</p>
     </Box>
+
+    
+
+
   );
 };
 

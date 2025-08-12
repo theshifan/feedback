@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'feedback',
     'rest_framework',
     'rest_framework.authtoken',
+    'rest_framework_simplejwt.token_blacklist',
     
 ]
 
@@ -131,13 +132,20 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_ALL_ORIGINS = True
-
+from datetime import timedelta
 
 REST_FRAMEWORK = {
-'DEFAULT_AUTHENTICATION_CLASSES': [
-'rest_framework.authentication.TokenAuthentication', # Token-based auth
-],
-'DEFAULT_PERMISSION_CLASSES': [
-'rest_framework.permissions.IsAuthenticated', # Restrict access to authenticated users
-],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',  # Restrict access to authenticated users
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "ROTATE_REFRESH_TOKENS": False,
+    "BLACKLIST_AFTER_ROTATION": True,
 }

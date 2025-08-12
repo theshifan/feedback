@@ -10,7 +10,7 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [conditionsAgreed, setConditionsAgreed] = useState(false);
+  // const [conditionsAgreed, setConditionsAgreed] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -81,13 +81,13 @@ const Signup = () => {
                 />
               </div>
 
-              <input
+              {/* <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email"
                 required
-              />
+              /> */}
 
               <input
                 type="password"
@@ -105,14 +105,14 @@ const Signup = () => {
                 required
               />
 
-              <label className="checkbox">
+              {/* <label className="checkbox">
                 <input
                   type="checkbox"
                   checked={conditionsAgreed}
                   onChange={() => setConditionsAgreed(!conditionsAgreed)}
                 />
                 I agree to the <a href="#">Terms & Conditions</a>
-              </label>
+              </label> */}
 
               <button type="submit" disabled={loading}>
                 {loading ? "Creating account..." : "Create account"}
