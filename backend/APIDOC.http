@@ -19,3 +19,11 @@ Content-Type: application/json
   "username": "sabu",
   "password": "sabu"
 }
+
+
+####
+GET  http://localhost:8000/main/products
+Content-Type: application/json
+
+
+    "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1MDE5MTY3LCJpYXQiOjE3NTUwMTg4NjcsImp0aSI6ImY4ZmYzMmExZTU2MTRhNWRhZWFjYTE4ODdmODdlOGRmIiwidXNlcl9pZCI6IjcifQ.MUm_B0wkgAeF3U2c9X9GIlD0UPhRI4FlX-PDMkEp-_c"
