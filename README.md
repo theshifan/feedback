@@ -21,7 +21,7 @@
 ---
 
 ## Features
-
+* Sign in and Sign up for the users and it can be regulated by the admin 
 * Submit feedback with rating, comments, and category.
 * Filter and sort feedback by product, category, or rating.
 * Interactive admin dashboard with product rating analysis.
@@ -98,7 +98,7 @@ Once both frontend and backend servers are running:
 ---
 
 ## Admin Features
-
+*can control the users
 * Add and delete products and categories
 * View and manage submitted feedback
 * Visual charts: product vs rating analytics
