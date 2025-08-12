@@ -1,0 +1,21 @@
+
+####
+
+POST http://127.0.0.1:8000/main/login/
+Content-Type: application/json
+
+{
+    "username": "testuser",
+    "email": "test@example.com",
+    "password": "password123"
+}
+
+
+### Login with JWT
+POST http://localhost:8000/api/token/
+Content-Type: application/json
+
+{
+  "username": "sabu",
+  "password": "sabu"
+}

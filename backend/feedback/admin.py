@@ -36,3 +36,7 @@ class WriterAdmin(admin.ModelAdmin):
 admin.site.register(Product)
 admin.site.register(Feedback, WriterAdmin)
 admin.site.register(Category)
+
+admin.site.site_header = "FeedBack Admin"
+admin.site.site_title = "FeedBack Admin Portal"
+admin.site.index_title = "Welcome to The FeedBack Portal"
